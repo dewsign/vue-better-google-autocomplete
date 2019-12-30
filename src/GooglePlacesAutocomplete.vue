@@ -82,6 +82,11 @@ export default {
             required: false,
             default: () => ({}),
         },
+        country:{
+                type: [Array,String],
+                required: false,
+                default:null,
+         },
 
     },
 
@@ -199,7 +204,8 @@ export default {
             const { service, sessionToken } = this.autocomplete
             const { input } = this.context
             const { bounds } = this
-
+            const country = this.country;
+            
             this.$set(this.autocomplete, 'resultsHighlight', 0)
 
             if (!input) {
@@ -210,6 +216,7 @@ export default {
 
             service.getPlacePredictions({
                 input,
+                componentRestrictions: {country: country},
                 sessionToken,
                 bounds,
             }, (predictions, status) => {
