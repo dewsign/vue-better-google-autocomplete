@@ -82,7 +82,14 @@ export default {
             required: false,
             default: () => ({}),
         },
-
+        country: {
+            type: [Array, String],
+            required: false,
+        },
+        options: {
+            type: Object,
+            default: () => ({}),
+        },
     },
 
     computed: {
@@ -101,8 +108,20 @@ export default {
                 'geometry',
                 ...this.fields,
             ]
-        }
+        },
 
+        mapOptions() {
+            const options = Object.assign({}, this.options);
+
+            if (this.country) {
+                Object.assign(options, {
+                    componentRestrictions: {
+                        country: this.country,
+                    },
+                })
+            }
+            return options
+        }
     },
 
     watch: {
@@ -212,6 +231,7 @@ export default {
                 input,
                 sessionToken,
                 bounds,
+                ...this.mapOptions,
             }, (predictions, status) => {
                 this.$set(this.autocomplete, 'status', status)
 
