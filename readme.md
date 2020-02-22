@@ -126,3 +126,21 @@ The underlying `ul` and `li` are not accessible via slots but you can style them
     </span>
 </google-places-autocomplete>
 ```
+
+### Restrict Country and more options
+Support restrict country and extends options
+
+Follow this document for getting more details
+
+[https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest](https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest)
+
+```html
+<template>
+  <div>
+    <google-places-autocomplete
+      :country="['us', 'au']"
+      :options="{ types: ['(cities)'] }"
+    />
+  </div>
+</template>
+```
